@@ -1,48 +1,54 @@
 #!/usr/bin/env nextflow
 
-nextflow.enable.dsl=2
-
-// Define input path
-inputPath = "$baseDir/de.bam"
+nextflow.enable.dsl = 2
+params.inputPath
 
 process indexBam {
+    container 'staphb/samtools:latest'
+
     input:
-    path bamPath
+        path bamPath
+
+    output:
+	    path bamPath
 
     script:
     """
-    crun.samtools samtools index -b ${bamPath} -@ 16
+    samtools index -b ${bamPath} -@ 16
     """
 }
 
 process convertToFastq {
+    container 'biocontainers/bamtools:2.4.0'
+
     input:
-    path bamPath
+        path bamPath
 
     output:
-    path "${bamPath}.fastq"
+        path "${bamPath}.fastq"
 
     script:
     """
-    crun.bamtools bamtools convert -in ${bamPath} -format fastq -out ${bamPath}.fastq
+    bamtools convert -in ${bamPath} -format fastq -out ${bamPath}.fastq
     """
 }
 
 process filterSeqtk {
+    container 'staphb/seqtk:latest'
+
     input:
-    path fastqPath
+        path fastqPath
 
     output:
-    path "${fastqPath}_gte150bp.fastq"
+        path "${fastqPath}_gte150bp.fastq"
 
     script:
     """
-    crun.seqtk seqtk seq -L 150 ${fastqPath} > ${fastqPath}_gte150bp.fastq
+    seqtk seq -L 150 ${fastqPath} > ${fastqPath}_gte150bp.fastq
     """
 }
 
 workflow {
-    indexBam(inputPath)
-    outfq=convertToFastq(inputPath)
-    filterSeqtk(outfq)
+    def input_ch = Channel.fromPath(params.inputPath)
+    indexBam(input_ch) | convertToFastq | filterSeqtk
 }
