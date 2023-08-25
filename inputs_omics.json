@@ -1,0 +1,13 @@
+{
+    "inputPath": "s3://mybucket/myfile.bam",
+    "onOmics": true,
+    "samToolsContainer": "000111222333.dkr.ecr.us-east-1.amazonaws.com/staphb/samtools:latest",
+    "samToolsCpu": "4",
+    "samToolsMemory": "32 GB",
+    "bamToolsContainer": "000111222333.dkr.ecr.us-east-1.amazonaws.com/biocontainers/bamtools:2.4.0",
+    "bamToolsCpu": "4",
+    "bamToolsMemory": "32 GB",
+    "seqtkContainer":    "000111222333.dkr.ecr.us-east-1.amazonaws.com/staphb/seqtk:latest",
+    "seqtkCpu": "4",
+    "seqtkMemory": "32 GB"
+}

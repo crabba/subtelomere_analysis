@@ -1,18 +1,32 @@
 #!/usr/bin/env nextflow
 
 nextflow.enable.dsl = 2
-params.inputPath
+
+params.inputPath = null
+params.onOmics = null
+params.samToolsContainer = null
+params.samToolsCpu = null
+params.samToolsMemory = null
+params.bamToolsContainer = null
+params.bamToolsCpu = null
+params.bamToolsMemory = null
+params.seqtkContainer = null
+params.seqtkCpu = null
+params.seqtkMemory = null
+
+publish_dir = { params.onOmics ? "/mnt/workflow/pubdir" : "." }
 
 process indexBam {
-    container 'staphb/samtools:latest'
-
-    publishDir "/mnt/workflow/pubdir"
-
+    container params.samToolsContainer
+    cpus params.samToolsCpu
+    memory params.samToolsMemory
+    publishDir publish_dir
+    
     input:
         path bamPath
 
     output:
-	    path bamPath
+	path bamPath
 
     script:
     """
@@ -21,10 +35,11 @@ process indexBam {
 }
 
 process convertToFastq {
-    container 'biocontainers/bamtools:2.4.0'
-
-    publishDir "/mnt/workflow/pubdir"
-
+    container params.bamToolsContainer
+    cpus params.bamToolsCpu
+    memory params.bamToolsMemory
+    publishDir publish_dir
+    
     input:
         path bamPath
 
@@ -38,9 +53,10 @@ process convertToFastq {
 }
 
 process filterSeqtk {
-    container 'staphb/seqtk:latest'
-
-    publishDir "/mnt/workflow/pubdir"
+    container params.seqtkContainer
+    cpus params.seqtkCpu
+    memory params.seqtkMemory
+    publishDir publish_dir
     
     input:
         path fastqPath

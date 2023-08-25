@@ -1,0 +1,35 @@
+{
+    "inputPath": {
+	"description": "(string) File to process"
+    },
+    "onOmics": {
+	"description": "(val) Running on AWS HealthOmics true/false"
+    },
+    "samToolsContainer": {
+	"description": "(string) Container for samtools"
+    },
+    "samToolsCpu": {
+	"description": "(string) CPU count for samtools"
+    },
+    "samToolsMemory": {
+	"description": "(string) Memory for samtools"
+    },
+    "bamToolsContainer": {
+	"description": "(string) Container for bamtools"
+    },
+    "bamToolsCpu": {
+	"description": "(string) CPU count for samtools"
+    },
+    "bamToolsMemory": {
+	"description": "(string) Memory for samtools"
+    },
+    "seqtkContainer": {
+	"description": "(string) Container for seqtk"
+    },
+    "seqtkCpu": {
+	"description": "(string) CPU count for samtools"
+    },
+    "seqtkMemory": {
+	"description": "(string) Memory for samtools"
+    }
+}
