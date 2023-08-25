@@ -6,6 +6,8 @@ params.inputPath
 process indexBam {
     container 'staphb/samtools:latest'
 
+    publishDir "/mnt/workflow/pubdir"
+
     input:
         path bamPath
 
@@ -20,6 +22,8 @@ process indexBam {
 
 process convertToFastq {
     container 'biocontainers/bamtools:2.4.0'
+
+    publishDir "/mnt/workflow/pubdir"
 
     input:
         path bamPath
@@ -36,6 +40,8 @@ process convertToFastq {
 process filterSeqtk {
     container 'staphb/seqtk:latest'
 
+    publishDir "/mnt/workflow/pubdir"
+    
     input:
         path fastqPath
 
