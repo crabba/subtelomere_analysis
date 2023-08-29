@@ -14,7 +14,7 @@ params.seqtkContainer = null
 params.seqtkCpu = null
 params.seqtkMemory = null
 
-publish_dir = { params.onOmics ? "/mnt/workflow/pubdir" : "." }
+publish_dir = "output"
 
 process indexBam {
     container params.samToolsContainer
@@ -39,6 +39,7 @@ process convertToFastq {
     cpus params.bamToolsCpu
     memory params.bamToolsMemory
     publishDir publish_dir
+    stageInMode = 'copy'
     
     input:
         path bamPath
