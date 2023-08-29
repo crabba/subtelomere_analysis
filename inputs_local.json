@@ -1,13 +1,13 @@
 {
-    "inputPath": "s3://mybucket/myfile.bam",
+    "inputPath": "myfile.bam",
     "onOmics": false,
-    "samToolsContainer": "staphb/samtools:latest",
-    "samToolsCpu": "2",
-    "samToolsMemory": "4 GB",
-    "bamToolsContainer": "biocontainers/bamtools:2.4.0",
-    "bamToolsCpu": "2",
-    "bamToolsMemory": "4 GB",
-    "seqtkContainer":    "staphb/seqtk:latest",
-    "seqtkCpu": "2",
-    "seqtkMemory": "4 GB"
+    "samToolsContainer": "samtools:1.18",
+    "samToolsCpu": "1",
+    "samToolsMemory": "1 GB",
+    "bamToolsContainer": "bamtools-apptainer:latest",
+    "bamToolsCpu": "1",
+    "bamToolsMemory": "1 GB",
+    "seqtkContainer":    "seqtk:1.4",
+    "seqtkCpu": "1",
+    "seqtkMemory": "1 GB"
 }
